@@ -8,7 +8,7 @@ const usersController = {
 
   create: async (req, res) => {
     const { displayName, email, password, image } = usersService.validateBody(req.body);
-    const userExists = await userService.checkIfExists(email);
+    const userExists = await usersService.checkIfExists(email);
     
     if (userExists) return res.status(409).json({ message: 'User already registered' });
 
