@@ -22,7 +22,7 @@ const authService = {
   },
 
   login: async (email, senha) => {
-    const user = await User.findOne({ where: { email }});
+    const user = await User.findOne({ where: { email } });
 
     if (!user || user.password !== senha) {
       const e = new Error('Invalid fields');
