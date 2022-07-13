@@ -13,9 +13,9 @@ app.use(express.json());
 
 app.use('/login', authRouter);
 
-app.use('/user', usersRouter);
-
 app.use(authController.validateToken);
+
+app.use('/user', usersRouter);
 
 app.use((err, _req, res, _next) => {
   const { name, message } = err;
@@ -26,9 +26,9 @@ app.use((err, _req, res, _next) => {
     case 'NotFoundError':
       res.status(404).json({ message });
       break;
-    /* case 'ConflictError':
+    case 'ConflictError':
       res.status(409).json({ message });
-      break; */
+      break;
     case 'UnauthorizedError':
       res.status(401).json({ message });
       break;

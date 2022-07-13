@@ -17,10 +17,10 @@ const usersService = {
     return value;
   },
 
-/*   list: async () => {
-    const users = await db.User.findAll();
+  list: async () => {
+    const users = await User.findAll();
     return users;
-  }, */
+  },
 
   create: async ({ displayName, email, password, image }) => {
     const user = await User.create({ displayName, email, password, image });
@@ -32,29 +32,25 @@ const usersService = {
     return false;
   },
 
-  /* findByIdLazy: async (id) => {
-    const user = await db.User.findByPk(id, {
-      attributes: { exclude: ['passwordHash', 'phone', 'createdAt', 'updatedAt'] },
-    });
-
-    const pets = await db.Pet.findAll({ where: { userId: user.id } });
+  findByIdLazy: async (id) => {
+    const user = await User.findByPk(id);
 
     const userJSON = user.dataValues;
 
-    const userWithPets = { ...userJSON, pets };
+    const userWithPets = { ...userJSON };
 
     if (!user) {
-      const e = new Error('User not found');
+      const e = new Error('User does not exist');
       e.name = 'NotFoundError';
       throw e;
     }
     return userWithPets;
   },
 
-  findByIdEager: async (id) => {
-    const user = await db.User.findByPk(id, {
+/*   findByIdEager: async (id) => {
+    const user = await User.findByPk(id, {
       attributes: { exclude: ['passwordHash', 'phone', 'createdAt', 'updatedAt'] },
-      include: { model: db.Pet, as: 'pets' },
+      include: { model: Pet, as: 'pets' },
     });
 
     if (!user) {
@@ -63,7 +59,7 @@ const usersService = {
       throw e;
     }
     return user;
-  }, */
+  },  */
 };
 
 module.exports = usersService;
