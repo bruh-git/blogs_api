@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Employee = sequelize.define('User', {
+  const User = sequelize.define('User', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     displayName: DataTypes.STRING,
     email: DataTypes.STRING,
@@ -9,14 +9,14 @@ module.exports = (sequelize, DataTypes) => {
   },
   {
     timestamps: false, // remove a obrigatoriedade de utilizar os campos `createdAt` e `updatedAt`
-    tableName: 'User',
+    tableName: 'Users',
     underscored: true,
   });
 
-  Employee.associate = (models) => {
+/*   Employee.associate = (models) => {
     Employee.hasOne(models.Address,
       { foreignKey: 'employeeId', as: 'addresses' });
-  };
+  }; */
 
-  return Employee;
+  return User;
 };
