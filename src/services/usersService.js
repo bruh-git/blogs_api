@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const { User } = require('../database/models');
+const jwtService = require('./jwtService');
 
 const usersService = {
   validateBody: (data) => {
@@ -24,7 +25,9 @@ const usersService = {
 
   create: async ({ displayName, email, password, image }) => {
     const user = await User.create({ displayName, email, password, image });
-    return user;
+    const { ...userWithoutPassword } = user.dataValues;
+    const token = jwtService.createToken(userWithoutPassword);
+    return token;
   },
   checkIfExists: async (email) => {
     const user = await User.findOne({ where: { email } });
