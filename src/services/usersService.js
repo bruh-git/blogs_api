@@ -45,7 +45,7 @@ const usersService = {
 
     if (!user) {
       const e = new Error('User does not exist');
-      e.name = 'NotFoundError';
+      e.name = 'ValidationError';
       throw e;
     }
     return user;
