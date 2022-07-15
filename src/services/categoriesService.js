@@ -12,21 +12,13 @@ const categoriesService = {
 
     if (error) throw error;
 
-/*   if (error) {
-      const e = new Error('"name" is required');
-      e.name = 'NotFoundError';
-      throw e;
-    } */
-
     return value;
   },
 
-/*   list: async () => {
-    const users = await Category.findAll({
-      attributes: { exclude: ['password'] },
-    });
-    return users;
-  }, */
+  list: async () => {
+    const categories = await Category.findAll();
+    return categories;
+  },
 
   checkIfExists: async (name) => {
     const category = await Category.findOne({ where: { name } });
