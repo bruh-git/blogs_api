@@ -50,20 +50,6 @@ const usersService = {
     }
     return user;
   },
-
-/*   findByIdEager: async (id) => {
-    const user = await User.findByPk(id, {
-      attributes: { exclude: ['passwordHash', 'phone', 'createdAt', 'updatedAt'] },
-      include: { model: Pet, as: 'pets' },
-    });
-
-    if (!user) {
-      const e = new Error('User not found');
-      e.name = 'NotFoundError';
-      throw e;
-    }
-    return user;
-  },  */
 };
 
 module.exports = usersService;
