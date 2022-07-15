@@ -19,7 +19,9 @@ const usersService = {
   },
 
   list: async () => {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      attributes: { exclude: ['password'] },
+    });
     return users;
   },
 
@@ -28,6 +30,7 @@ const usersService = {
     if (user) return true;
     return false;
   },
+
   create: async ({ displayName, email, password, image }) => {
     const user = await User.create({ displayName, email, password, image });
     const { ...userWithoutPassword } = user.dataValues;
@@ -36,18 +39,16 @@ const usersService = {
   },
 
   findByIdLazy: async (id) => {
-    const user = await User.findByPk(id);
-
-    const userJSON = user.dataValues;
-
-    const userWithPets = { ...userJSON };
+    const user = await User.findByPk(id, {
+      attributes: { exclude: ['password'] },
+    });
 
     if (!user) {
       const e = new Error('User does not exist');
       e.name = 'NotFoundError';
       throw e;
     }
-    return userWithPets;
+    return user;
   },
 
 /*   findByIdEager: async (id) => {

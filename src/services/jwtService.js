@@ -3,7 +3,10 @@ require('dotenv').config();
 
 const jwtService = {
   createToken: (data) => {
-    const token = jwt.sign({ data }, process.env.JWT_SECRET);
+    const token = jwt.sign(data, process.env.JWT_SECRET, {
+      expiresIn: '5d',
+      algorithm: 'HS256',
+    });
     return token;
   },
 

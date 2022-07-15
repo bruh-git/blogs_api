@@ -11,7 +11,6 @@ const authService = {
 
     const { error, value } = schema.validate(data);
 
-    /* if (error) throw error; */
     if (error) {
       const e = new Error('Some required fields are missing');
       e.name = 'ValidationError';
@@ -37,8 +36,13 @@ const authService = {
     return token;
   },
 
-  validateToken: (token) => {
-    const data = jwtService.validateToken(token);
+  validateToken: async (token) => {
+    if (!token) {
+      const e = new Error('Token not found');
+      e.name = 'UnauthorizedError';
+      throw e;
+    }
+    const data = await jwtService.validateToken(token);
 
     return data;
   },
