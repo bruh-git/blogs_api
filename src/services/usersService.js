@@ -23,16 +23,16 @@ const usersService = {
     return users;
   },
 
+  checkIfExists: async (email) => {
+    const user = await User.findOne({ where: { email } });
+    if (user) return true;
+    return false;
+  },
   create: async ({ displayName, email, password, image }) => {
     const user = await User.create({ displayName, email, password, image });
     const { ...userWithoutPassword } = user.dataValues;
     const token = jwtService.createToken(userWithoutPassword);
     return token;
-  },
-  checkIfExists: async (email) => {
-    const user = await User.findOne({ where: { email } });
-    if (user) return true;
-    return false;
   },
 
   findByIdLazy: async (id) => {
