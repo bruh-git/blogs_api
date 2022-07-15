@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const { Category } = require('../database/models');
-/* const jwtService = require('./jwtService'); */
 
 const categoriesService = {
   validateBody: (data) => {
@@ -28,23 +27,8 @@ const categoriesService = {
 
   create: async ({ name }) => {
     const category = await Category.create({ name });
-    /* const { ...categoryWithoutPassword } = category.dataValues; */
-    /* const token = jwtService.createToken(categoryWithoutPassword); */
     return category;
   },
-
-/*   findByIdLazy: async (id) => {
-    const user = await Category.findByPk(id, {
-      attributes: { exclude: ['password'] },
-    });
-
-    if (!user) {
-      const e = new Error('User does not exist');
-      e.name = 'NotFoundError';
-      throw e;
-    }
-    return user;
-  }, */
 };
 
 module.exports = categoriesService;

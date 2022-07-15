@@ -11,6 +11,4 @@ router.post('/', categoriesController.create);
 
 router.get('/', categoriesController.list);
 
-router.get('/:id', categoriesController.findById);
-
 module.exports = router;
