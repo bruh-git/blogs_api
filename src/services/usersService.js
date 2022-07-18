@@ -50,6 +50,14 @@ const usersService = {
     }
     return user;
   },
+  
+/*   delete: async (id) => {
+    const userDelete = await User.destroy(
+      { where: { id } },
+    );
+    return userDelete;
+  }, */
+  delete: (id) => User.destroy({ where: id }),
 };
 
 module.exports = usersService;

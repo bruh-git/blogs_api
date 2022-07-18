@@ -6,14 +6,10 @@ module.exports = (sequelize, DataTypes) => {
   },
   {
     timestamps: false, 
-    tableName: 'Categories',
     /* underscored: true, */
   });
 
-/*   Employee.associate = (models) => {
-    Employee.hasOne(models.Address,
-      { foreignKey: 'employeeId', as: 'addresses' });
-  }; */
+  Category.associate = (_models) => {};
 
   return Category;
 };

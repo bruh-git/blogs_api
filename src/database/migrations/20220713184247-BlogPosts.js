@@ -17,20 +17,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      published: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updated: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
       userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
-        /* field: 'user_id', */
         // Informa que o campo é uma Foreign Key (Chave estrangeira)
         references: {
           // Informa a tabela da referência da associação
@@ -39,11 +29,18 @@ module.exports = {
           key: 'id',
         },
       },
-      
+      published: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updated: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
     });
   },
 
-  async down (queryInterface, Sequelize) {
+  async down (queryInterface, _Sequelize) {
     await queryInterface.dropTable('BlogPosts');
   }
 };

@@ -22,6 +22,13 @@ const usersController = {
 
     res.status(200).json(user);
   },
+  deletar: async (req, res) => {
+    const { id } = req.user;
+
+    await usersService.delete(id);
+
+    res.status(204).end();
+  },
 };
 
 module.exports = usersController;
