@@ -54,16 +54,23 @@ list: async (userId) => {
     return blogPost;
   }, */
 
-/*   findByIdLazy: async (id) => {
-    const post = await PostCategory.findByPk(id);
+  findByIdLazy: async (id) => {
+    const post = await BlogPost.findByPk(id, {
+      where: id,
+      include: [
+        { model: User, as: 'user' },
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Category, as: 'categories', through: { attributes: [] } },
+      ],
+    });
 
     if (!post) {
-      const e = new Error('Posts does not exist');
+      const e = new Error('Post does not exist');
       e.name = 'NotFoundError';
       throw e;
     }
     return post;
-  }, */
+  },
 };
 
 module.exports = postsService;
