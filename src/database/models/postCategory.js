@@ -1,13 +1,13 @@
 'use strict';
-module.exports = (sequelize, _DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const PostCategory = sequelize.define('PostCategory', {
       postId: {
-      type: _DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
     },
     categoryId: {
-      type: _DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false,
     },

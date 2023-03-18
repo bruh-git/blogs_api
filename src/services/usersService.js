@@ -51,13 +51,13 @@ const usersService = {
     return user;
   },
   
-/*   delete: async (id) => {
+  delete: async (id) => {
     const userDelete = await User.destroy(
       { where: { id } },
     );
     return userDelete;
-  }, */
-  delete: (id) => User.destroy({ where: id }),
+  },
+  /* delete: () => User.destroy({ truncate: true }), */
 };
 
 module.exports = usersService;

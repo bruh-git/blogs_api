@@ -19,6 +19,22 @@ const postsService = {
     
     return value;
   },
+  validateBodyPost: (data) => {
+    const schema = Joi.object({
+      title: Joi.string().required(),
+      content: Joi.string().required(),
+    });
+
+    const { error, value } = schema.validate(data);
+
+    if (error) {
+      const e = new Error('Some required fields are missing');
+      e.name = 'ValidationError';
+      throw e;
+    }
+    
+    return value;
+  },
 
 list: async (userId) => {
     const posts = await BlogPost.findAll({
@@ -70,6 +86,23 @@ list: async (userId) => {
       throw e;
     }
     return post;
+  },
+
+  update: async (data) => { 
+    const blogPost = await postsService.findByIdLazy(data.id);
+
+    if (blogPost.userId !== data.userId) {
+      const e = new Error('Unauthorized user');
+      e.name = 'UnauthorizedError';
+      throw e;
+    }
+
+    await BlogPost.update({
+      title: data.title,
+      content: data.content,
+    });
+
+    return blogPost;
   },
 };
 

@@ -23,7 +23,7 @@ const usersController = {
     res.status(200).json(user);
   },
   deletar: async (req, res) => {
-    const { id } = req.user;
+    const { id } = req.params;
 
     await usersService.delete(id);
 
